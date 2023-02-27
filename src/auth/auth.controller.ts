@@ -12,6 +12,7 @@ import { LoginResponse } from 'src/auth/auth.type';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/decorators/get-user.decorator';
 import { User } from 'src/auth/user.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -32,7 +33,7 @@ export class AuthController {
   }
 
   @Post('/test')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   test(@GetUser() user: User) {
     console.log('user', user);
   }
